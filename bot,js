@@ -1,0 +1,35 @@
+function check(n){
+  return document.getElementsByClassName("MuiPaper-elevation1")[1].children[n].style.visibility==="visible"
+}
+
+function fade(n){
+  document.getElementsByClassName("MuiPaper-elevation1")[1].children[n].style["background-color"] = "black";
+}
+
+function unfade(n){
+  document.getElementsByClassName("MuiPaper-elevation1")[1].children[n].style["background-color"] = "white";
+}
+
+function lookForSets(){
+  let poss = [[0,0,0],[1,1,1],[2,2,2],[1,2,0],[1,0,2],[2,1,0],[2,0,1],[0,1,2],[0,2,1]];
+  for(let a=1;a<82;a++) unfade(a);
+  outerloop: for(let a=0;a<9;a++){
+  for(let b=0;b<9;b++){
+  for(let c=0;c<9;c++){
+  for(let d=0;d<9;d++){
+    let n1 = 27*poss[a][0] + 9*poss[b][0] + 3*poss[c][0] + poss[d][0] + 1;
+    let n2 = 27*poss[a][1] + 9*poss[b][1] + 3*poss[c][1] + poss[d][1] + 1;
+    let n3 = 27*poss[a][2] + 9*poss[b][2] + 3*poss[c][2] + poss[d][2] + 1;
+    
+    if((n1!=n2||n2!=n3)&&check(n1)&&check(n2)&&check(n3)){
+      fade(n1);
+      fade(n2);
+      fade(n3);
+      break outerloop;
+    }
+    
+  }}}}
+  
+}
+
+document.addEventListener("keydown", function(e){ if(e.keyCode===32) lookForSets(); })
