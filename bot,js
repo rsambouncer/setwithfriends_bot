@@ -55,7 +55,7 @@ function autoClick(){
 
 document.addEventListener("keydown", function(e){ 
   if(e.key===" ") lookForSets(); //space
-  if(e.key==="m") autoClick(); //m key
+  if(e.key==="m"){ lookForSets(); autoClick();} //m key
 })
 
 
