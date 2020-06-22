@@ -1,18 +1,31 @@
+function cardElement(n){
+  return document.getElementsByClassName("MuiPaper-elevation1")[1].children[n];
+}
+
 function check(n){
-  return document.getElementsByClassName("MuiPaper-elevation1")[1].children[n].style.visibility==="visible"
+  return cardElement(n).style.visibility==="visible";
+}
+
+function clickEl(n){
+  cardElement(n).children[0].click();
 }
 
 function fade(n){
-  document.getElementsByClassName("MuiPaper-elevation1")[1].children[n].style["background-color"] = "black";
+  cardElement(n).style["background-color"] = "black";
 }
 
 function unfade(n){
-  document.getElementsByClassName("MuiPaper-elevation1")[1].children[n].style["background-color"] = "white";
+  cardElement(n).style["background-color"] = "white";
 }
 
+
+let poss = [[0,0,0],[1,1,1],[2,2,2],[1,2,0],[1,0,2],[2,1,0],[2,0,1],[0,1,2],[0,2,1]];
+let currentSolution = null;
+
 function lookForSets(){
-  let poss = [[0,0,0],[1,1,1],[2,2,2],[1,2,0],[1,0,2],[2,1,0],[2,0,1],[0,1,2],[0,2,1]];
   for(let a=1;a<82;a++) unfade(a);
+  currentSolution = {n1:-1,n2:-1,n3:-1};
+  
   outerloop: for(let a=0;a<9;a++){
   for(let b=0;b<9;b++){
   for(let c=0;c<9;c++){
@@ -25,6 +38,7 @@ function lookForSets(){
       fade(n1);
       fade(n2);
       fade(n3);
+      currentSolution = {n1:n1,n2:n2,n3:n3};
       break outerloop;
     }
     
@@ -32,4 +46,17 @@ function lookForSets(){
   
 }
 
-document.addEventListener("keydown", function(e){ if(e.keyCode===32) lookForSets(); })
+function autoClick(){
+  clickEl(currentSolution.n1);
+  clickEl(currentSolution.n2);
+  clickEl(currentSolution.n3);
+}
+
+
+document.addEventListener("keydown", function(e){ 
+  if(e.key===" ") lookForSets(); //space
+  if(e.key==="m") autoClick(); //m key
+})
+
+
+
