@@ -1,6 +1,6 @@
 This bot will tell you the winning moves in set.
 
-In setwithfriends.com, paste this in the javascript console.
+In setwithfriends.com, paste bot.js in the javascript console.
 
 To find a set, press space.
 
