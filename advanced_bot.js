@@ -63,9 +63,19 @@ function autoClick(){
 }
 
 
+function gogogo(n){
+  if(n<=0) return;
+  lookForSets(false); 
+  autoClick();
+  window.setTimeout(function() {
+    gogogo(n-1);
+  }, 5);
+}
+
 document.addEventListener("keypress", function(e){ 
   if(e.key===" "){ lookForSets(false); autoClick();} //space
   if(e.key==="m") reset(); //m key
+  if(e.key==="n"){ reset(); gogogo(50); }
 });
 
 
