@@ -4,4 +4,6 @@ In setwithfriends.com, paste this in the javascript console.
 
 To find a set, press space.
 
+To automatically click on a found set, press 'm'.
+
 I do not condone cheating, please don't use in multiplayer games.
