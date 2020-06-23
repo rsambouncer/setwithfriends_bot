@@ -10,26 +10,19 @@ function clickEl(n){
   cardElement(n).children[0].click();
 }
 
-function fade(n){
-  cardElement(n).style["background-color"] = "black";
-}
-
-function unfade(n){
-  cardElement(n).style["background-color"] = "white";
-}
-
-
 let poss = [[0,0,0],[1,1,1],[2,2,2],[1,2,0],[1,0,2],[2,1,0],[2,0,1],[0,1,2],[0,2,1]];
 let currentSolution = {n1:-1,n2:-1,n3:-1};
-let completes = new Array(82);
+let completes = new Array(82); //the cards that have been used in sets already
 
 function reset(){
   for(let a=0;a<completes.length;a++) completes[a] = false;
 }
 
-function lookForSets(drawHint){
+//loop through all possibilities to find a solution on the board
+function lookForSets(){ 
   currentSolution = {n1:-1,n2:-1,n3:-1};
-  outerloop: for(let a=0;a<9;a++){
+  outerloop: 
+  for(let a=0;a<9;a++){
   for(let b=0;b<9;b++){
   for(let c=0;c<9;c++){
   for(let d=0;d<9;d++){
@@ -43,13 +36,6 @@ function lookForSets(drawHint){
     }
     
   }}}}
-  
-  if(drawHint){
-    for(let a=1;a<82;a++) unfade(a);
-    fade(currentSolution.n1);
-    fade(currentSolution.n2);
-    fade(currentSolution.n3);
-  }
 }
 
 function autoClick(){
@@ -63,19 +49,15 @@ function autoClick(){
 }
 
 
-function gogogo(n){
+function doWholeGame(n){
   if(n<=0) return;
-  lookForSets(false); 
+  lookForSets(); 
   autoClick();
-  window.setTimeout(function() {
-    gogogo(n-1);
-  }, 5);
+  window.setTimeout(()=> doWholeGame(n-1), 5);
 }
 
 document.addEventListener("keypress", function(e){ 
-  if(e.key===" "){ lookForSets(false); autoClick();} //space
-  if(e.key==="m") reset(); //m key
-  if(e.key==="n"){ reset(); gogogo(50); }
+  if(e.key===" "){ reset(); doWholeGame(50); }
 });
 
 
